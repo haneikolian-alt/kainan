@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Site Meme</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>Site do Kainan</h1>
+
+<button onclick="mostrarImagem()">
+o maior comedor de xota do campus
+</button>
+
+<button onclick="matarKainan()">
+matar kainan
+</button>
+
+<div id="ana">
+❤️ ANA JULIA ❤️
+</div>
+
+<img id="foto" src="image.png" alt="kainan">
+
+<h2 id="morte"></h2>
+
+<script>
+
+let verificando = false;
+
+function mostrarImagem(){
+
+const img = document.getElementById("foto");
+
+img.style.display = "block";
+img.classList.add("correr");
+
+/* inicia verificação contínua */
+if(!verificando){
+
+setInterval(verificarColisao,100);
+verificando = true;
+
+}
+
+}
+
+function verificarColisao(){
+
+const foto = document.getElementById("foto").getBoundingClientRect();
+const ana = document.getElementById("ana").getBoundingClientRect();
+
+if(
+foto.left < ana.right &&
+foto.right > ana.left &&
+foto.top < ana.bottom &&
+foto.bottom > ana.top
+){
+chuvaBeijo();
+}
+
+}
+
+function chuvaBeijo(){
+
+for(let i=0;i<8;i++){
+
+const beijo = document.createElement("div");
+
+beijo.className = "beijo";
+beijo.innerText = "😘";
+
+beijo.style.left = Math.random()*window.innerWidth + "px";
+beijo.style.top = Math.random()*window.innerHeight + "px";
+
+document.body.appendChild(beijo);
+
+setTimeout(()=>{
+beijo.remove();
+},2000);
+
+}
+
+}
+
+function matarKainan(){
+
+document.body.style.background = "black";
+document.body.style.color = "white";
+
+const img = document.getElementById("foto");
+
+/* Para a animação */
+img.classList.remove("correr");
+
+/* Deixa ele cinza e rotacionado */
+img.style.filter = "grayscale(100%)";
+img.style.transform = "rotate(0deg)";
+
+/* Centraliza a imagem */
+img.style.position = "absolute";
+img.style.top = "50%";
+img.style.left = "50%";
+img.style.transform += " translate(-50%, -50%)";
+
+/* Texto de morte */
+document.getElementById("morte").innerText = "💀 Kainan morreu 💀";
+
+/* Começa a mensagem repetida */
+setInterval(chuvaTexto, 300);
+
+}
+
+function chuvaTexto(){
+
+const txt = document.createElement("div");
+
+txt.className = "mensagem";
+txt.innerText = "Ana Julia, só você pode me salvar";
+
+txt.style.left = Math.random()*window.innerWidth + "px";
+txt.style.top = Math.random()*window.innerHeight + "px";
+
+document.body.appendChild(txt);
+
+/* Remove depois de 4s */
+setTimeout(()=>{
+txt.remove();
+},4000);
+
+}
+
+</script>
+
+</body>
+</html>
